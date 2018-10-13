@@ -1,0 +1,92 @@
+.container{
+
+}
+header h1 {
+    padding: 30px 0;
+}
+
+p.error {
+    padding: 20px 0;
+    color: red;
+}
+.br-r{
+    border-right: 1px solid grey;
+}
+.info {
+    color: green;
+}
+
+.mb-2 {
+    margin-bottom: 20px;
+}
+
+.mt-2 {
+    margin-top: 20px;
+}
+.mt-50{
+    margin-top: 50px;
+}
+.mb-50{
+    margin-bottom: 50px;
+}
+a.admins, a.themes,a.questions{
+    display: block;
+    width: 100%;
+    padding: 30px;
+    text-align: center;
+    color: #ffffff;
+    font-size: 150%;
+}
+.admins{
+    background: rgba(255, 0, 0, 0.67);
+}
+.themes{
+    background: #0a01ef;
+}
+.questions{
+    background: #19cd0c;
+}
+.jumbotron {
+    background-color: #dedede;
+}
+.dropdown-menu {
+    min-width: 250px;
+}
+
+.list-group-item {
+    background: none;
+    border: none;
+}
+.tooltip.top .tooltip-inner {
+    /*background-color:#d9534f;*/
+}
+.table > tbody > tr > th {
+    border-top: none;
+}
+
+td.short-string span{
+    display: none;
+    position: absolute; top: 35px; left: -2px;
+    z-index: 1;
+    width: 400px;
+    padding: 15px;
+    text-align: left;
+    background: #FDFDFD;
+    border-bottom:2px solid #ccc;
+    border-left:2px solid #ccc;
+    border-right:2px solid #ccc;
+}
+td.short-string:hover span{
+    display: block;
+    cursor: pointer;
+    height: auto;
+}
+.front-form{
+    /*border: 1px solid #bcbcbc;*/
+}
+@media (min-width: 768px) {
+    .modal-dialog {
+        width: 600px;
+        margin: 15% auto;
+    }
+}
