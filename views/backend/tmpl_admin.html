@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{{title}}</title>
+
+	<link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="../../assets/css/style.css">
+
+  </head>
+  <body>
+
+	<header class="header">
+	  {% include 'navbar.html' %}
+	</header>
+
+	<section class="container">
+	  <div class="row">
+		<div class="col-md-12">
+		  <div class="page-header">
+			<h1>Админ | {{title}}</h1>
+		  </div>
+		</div>
+	  </div>
+	  <div class="row">
+		<div class="col-md-3">
+		<h3>Темы</h3>
+		  <div class="panel-group br-r" id="accordion" role="tablist" aria-multiselectable="true">
+			<div class="list-group">
+			  {% for theme in themes %}
+			  <a href="/themes/theme/{{theme.id_cat}}" class="list-group-item">{{theme.title}} <span class="badge">{{theme.count_quests}}</span></a>
+			  {% endfor %}
+			</div>
+		  </div>
+		</div>
+		<div class="col-md-9 mb-50">
+		{% if error %}
+        <div class="alert alert-danger text-center">
+        {{error}}
+        </div>
+        {% endif %}
+		  {% block content %}
+		  {% endblock %}
+		</div>
+	  </div>
+	</section>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="../../assets/bootstrap/js/bootstrap.js"></script>
+	<script src="../../assets/js/scripts.min.js"></script>
+  </body>
+</html>

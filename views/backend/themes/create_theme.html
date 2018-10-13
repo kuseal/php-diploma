@@ -1,0 +1,18 @@
+{% extends 'tmpl_admin.html' %}
+{% block content %}
+
+<form method="post" action="/themes/create">
+  <div class="row">
+	<div class="col-md-6">
+	  <div class="form-group">
+		<label>Название темы</label>
+		<input class="form-control" name="title" placeholder="Тема" required>
+	  </div>
+	  <div class="form-group">
+		<input class="btn btn-primary" type="submit" value="Создать">
+	  </div>
+	</div>
+  </div>
+</form>
+
+{% endblock %}

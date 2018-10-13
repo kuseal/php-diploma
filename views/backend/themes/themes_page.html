@@ -1,0 +1,33 @@
+{% extends 'tmpl_admin.html' %}
+{% block content %}
+
+<table class="table table-condensed  table-responsive">
+  <tr>
+    <th>#</th>
+    <th>Название темы</th>
+    <th>Всего вопросов</th>
+    <th>Опубликовано</th>
+    <th>Без ответа</th>
+    <th>Cкрыто</th>
+    <th></th>
+  </tr>
+  {% for theme in themes %}
+<tr>
+  <td>{{ loop.index }}</td>
+  <td><a href="/themes/theme/{{theme.id_cat}}"> {{theme.title}}</a></td>
+  <td class="text-center">{% if theme.count_quests %}{{theme.count_quests}}{% else %} - {% endif %}</td>
+  <td class="text-center">{% if theme.status_view %}{{theme.status_view}}{% else %} - {% endif %}</td>
+  <td class="text-center">{% if theme.status_empty %}{{theme.status_empty}}{% else %} - {% endif %}</td>
+  <td class="text-center">{% if theme.status_hidden %}{{theme.status_hidden}}{% else %} - {% endif %}</td>
+  <td class="text-right"><a class="btn btn-danger btn-sm" href="themes/delete/{{theme.id_cat}}" data-toggle="tooltip" data-placement="top" title="Удалиться тема и все вопросы данной темы"> Удалить тему</a></td>
+</tr>
+  {% endfor %}
+</table>
+<div class="text-center">
+<a type="button" class="btn btn-warning" href="/themes/create">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Добавить тему
+  </a>
+</div>
+
+{% endblock %}
+
