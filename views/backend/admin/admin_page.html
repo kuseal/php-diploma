@@ -1,0 +1,20 @@
+{% extends 'tmpl_admin.html' %}
+{% block content  %}
+<div class="">
+<div class="jumbotron text-center">
+  <h2>Добро пожаловать в панель администратора!</h2>
+</div>
+<div class="row">
+<div class="col-md-4">
+ <a class="admins" href="/admin/all_admins">Админов {{admins|length}}</a>
+</div>
+<div class="col-md-4">
+<a class="themes" href="/themes/">Тем {{themes|length}}</a>
+</div>
+<div class="col-md-4">
+<a class="questions" href="/questions">Вопросов {{questions|length}}</a>
+</div>
+</div>
+</div>
+
+{% endblock %}

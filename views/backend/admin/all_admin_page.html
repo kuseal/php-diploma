@@ -1,0 +1,31 @@
+{% extends 'tmpl_admin.html' %}
+{% block content  %}
+<div class="row">
+<div class="col-md-8">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Логин</th>
+                <th>Статус</th>
+                <th></th>
+                <th></th>
+            </tr>
+        {% for admin in admins %}
+            <tr>
+                 <td>{{admin.login}}</td>
+                 <td>{{admin.status}}</td>
+                 <td><a class="btn btn-primary btn-sm" href="/admin/update_pass/{{admin.id}}">Изменить пароль</a> </td>
+                 <td><a class="btn btn-danger btn-sm" href="/admin/delete_admin/{{admin.id}}">Удалить админа</a> </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+<div class="row">
+<div class="col-md-8 text-center">
+<a class="btn btn-warning" href="/admin/add_admin">Добавить администратора</a>
+</div>
+</div>
+
+{% endblock %}

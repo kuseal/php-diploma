@@ -1,0 +1,45 @@
+{% extends 'tmpl_admin.html' %}
+{% block content  %}
+
+<form method="post" action="/questions/update/{{question.id}}">
+  <div class="form-group">
+    <label for="user">Автор</label>
+    <input type="text" class="form-control" name="user" id="user" value="{{question.user_name}}" required>
+  </div>
+  <div class="form-group">
+    <label for="Email1">Email автора</label>
+    <input type="email" class="form-control" name="email" id="Email1" value="{{question.email}}" required>
+  </div>
+  <div class="form-group">
+    <label for="theme">Тема</label>
+    <select class="form-control" name="theme" id="theme">
+      <option value="{{question.id_cat}}">{{question.title_cat}}</option>
+      {% for theme in themes %}
+<option value="{{theme.id_cat}}}">{{theme.title}}</option>
+      {% endfor %}
+    </select>
+  </div>
+    <div class="form-group">
+      <label for="status">Статус</label>
+      <select class="form-control" name="status" id="status">
+        <option value="{{question.id_status}}">{{question.title_status}}</option>
+        {% for value in status %}
+  <option value="{{value.id}}">{{value.title}}</option>
+        {% endfor %}
+      </select>
+    </div>
+  <div class="form-group">
+    <label for="question">Вопрос</label>
+    <textarea class="form-control" name="question" id="question" rows="2" required>{{question.question}}</textarea>
+    <p class="help-block">Вопрос автора <b>{{question.user_name}}</b></p>
+  </div>
+  <div class="form-group">
+    <label for="answer">Ответ</label>
+    <textarea class="form-control" name="answer" id="answer" rows="5">{{question.answer}}</textarea>
+    <p class="help-block">Ответ автору <b>{{question.user_name}}</b></p>
+  </div>
+  <button type="submit" class="btn btn-primary">Отправить</button>
+  <input hidden name="id" value="{{question.id}}">
+</form>
+
+{% endblock %}
