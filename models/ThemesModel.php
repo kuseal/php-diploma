@@ -5,6 +5,10 @@
   use lib\DataBase;
 
   class ThemesModel extends DataBase {
+    public function __construct() {
+      parent::__construct();
+    }
+
 
     // Ввывод категорий только с разрешенными к показу вопросами
     public static function frontendThemes() {
@@ -33,12 +37,11 @@
     }
 
     public static function getTheme($id) {
-      $sql = "SELECT c.* FROM categories c WHERE c.id = ?";
+      $sql = "SELECT c.id, c.title FROM categories c WHERE c.id = ? ";
       $sth = self::DB()->prepare($sql);
       $sth->bindParam(1, $id, \PDO::PARAM_INT);
       $sth->execute();
       $result = $sth->fetchAll(\PDO::FETCH_ASSOC);
-
       return $result ? $result[0] : false;
     }
 
@@ -46,8 +49,10 @@
     public static function createTheme($title) {
       $sql = "INSERT INTO categories (`title`) VALUES (?)";
       $sth = self::DB()->prepare($sql);
+
       $sth->bindParam(1, $title, \PDO::PARAM_STR);
-      return $sth->execute() ? true : false;
+
+      return $sth->execute() ? self::DB()->lastInsertId() : false;
     }
 
     // UPDATE THEME
@@ -56,10 +61,10 @@
       $sth = self::DB()->prepare($sql);
       $sth->bindParam(1, $title, \PDO::PARAM_STR);
       $sth->bindParam(1, $id, \PDO::PARAM_INT);
-       $sth->execute();
+      $sth->execute();
       return $sth->rowCount() ? true : false;
     }
-    
+
     // DELETE THEME
     public static function deleteTheme($id) {
       $sql = "DELETE FROM categories WHERE id = ?";
@@ -76,6 +81,7 @@
       $sth = self::DB()->prepare($sql);
       $sth->bindParam(1, $id, \PDO::PARAM_INT);
       $sth->execute();
+
       return $sth->rowCount() ? true : false;
     }
 

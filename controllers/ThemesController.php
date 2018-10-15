@@ -13,7 +13,7 @@
       if (!isset($_SESSION['role'])) {
         header('Location: /login');
       }
-      parent::__construct('/backend');
+      parent::__construct('backend');
     }
 
     public function index() {
@@ -41,7 +41,8 @@
     public function create() {
       if (!empty($_POST)) {
         if (Vld::createTheme()) {
-          if (ThemesModel::createTheme(Vld::createTheme()['title'])) {
+          if ($id = ThemesModel::createTheme(Vld::createTheme()['title'])) {
+            $this->log->createTheme(Vld::createTheme()['title'], $id);
             header("Location: /themes");
           } else {
             $data['error'] = 'Тема не создана.';
@@ -59,18 +60,21 @@
 
     // DELETE THEME
     public function delete($id) {
+      $title = ThemesModel::getTheme($id)['title'];
       if (QuestionsModel::questionsInTheme((int)$id)) {
         if (ThemesModel::deleteThemeAndQuestions((int)$id)) {
+          $this->log->deleteTheme($title, $id);
           header('Location: /themes');
         } else {
           header($_SERVER['SERVER_PROTOCOL'] . 'HTTP/1.0 404 Not found');
-          die('<h2>Ошибка 404</h2> <p>Нет страницы</p>');
+          die('<h2>Ошибка 404</h2> <p>Нет страницы 1</p>');
         }
       } elseif (ThemesModel::deleteTheme((int)$id)) {
+        $this->log->deleteTheme($title, $id);
         header('Location: /themes');
       } else {
         header($_SERVER['SERVER_PROTOCOL'] . 'HTTP/1.0 404 Not found');
-        die('<h2>Ошибка 404</h2> <p>Нет страницы</p>');
+        die('<h2>Ошибка 404</h2> <p>Нет страницы 2</p>');
       }
 
     }

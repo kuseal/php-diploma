@@ -42,7 +42,7 @@
       $sth->execute();
       $result = $sth->fetchAll(\PDO::FETCH_ASSOC);
 
-      return ($result > 0) ? $result : false;
+      return ($result > 0) ? $result[0] : false;
     }
 
     public static function questionsInTheme($id) {

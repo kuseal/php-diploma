@@ -39,6 +39,10 @@
         if (!empty($_POST)) {
           if (Vld::editQuestion()) {
             if (QuestionsModel::updateQuestion(Vld::editQuestion()['user'], Vld::editQuestion()['email'], Vld::editQuestion()['theme'], Vld::editQuestion()['question'], Vld::editQuestion()['answer'], Vld::editQuestion()['status'], Vld::editQuestion()['id'])) {
+              $theme = ThemesModel::getTheme(Vld::editQuestion()['theme'])['title'];
+              $idTheme = Vld::editQuestion()['theme'];
+              $status = Vld::editQuestion()['status'];
+              $this->log->Quest($theme, $idTheme, $status, $id);
               header('Location: /questions/view_question/' . $_POST['id']);
             } else {
               $data['error'] = 'Некорректно заполнена форма.';
@@ -49,7 +53,7 @@
         }
         $data['title'] = 'Редактировать вопрос';
         $data['themes'] = ThemesModel::getAllThemes();
-        $data['question'] = QuestionsModel::viewQuestion($id)[0];
+        $data['question'] = QuestionsModel::viewQuestion($id);
         $data['status'] = QuestionsModel::status();
 
         $this->views->render('/questions/update_question_page', $data);
@@ -63,7 +67,7 @@
       if (QuestionsModel::viewQuestion((int)$id)) {
         $data['title'] = 'Вопрос';
         $data['themes'] = ThemesModel::getAllThemes();
-        $data['question'] = QuestionsModel::viewQuestion($id)[0];
+        $data['question'] = QuestionsModel::viewQuestion($id);
 
         $this->views->render('/questions/view_question_page', $data);
       } else {
@@ -73,11 +77,15 @@
     }
 
     public function delete($id) {
+      $idTheme = QuestionsModel::viewQuestion($id)['id_cat'];
+      $theme = QuestionsModel::viewQuestion($id)['title_cat'];
+//      $theme = ThemesModel::getTheme($idTheme)['title'];
       if (QuestionsModel::deleteQuestion((int)$id)) {
+        $this->log->deleteQuest($theme, $idTheme, $id);
         header('Location: /questions');
       } else {
         header($_SERVER['SERVER_PROTOCOL'] . 'HTTP/1.0 404 Not found');
-        die('<h2>Ошибка 404</h2> <p>Нет страницы</p>');
+       die('<h2>Ошибка 404</h2> <p>Нет страницы</p>');
       }
     }
   }

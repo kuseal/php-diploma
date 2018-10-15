@@ -19,7 +19,7 @@
   <td class="text-center">{% if theme.status_view %}{{theme.status_view}}{% else %} - {% endif %}</td>
   <td class="text-center">{% if theme.status_empty %}{{theme.status_empty}}{% else %} - {% endif %}</td>
   <td class="text-center">{% if theme.status_hidden %}{{theme.status_hidden}}{% else %} - {% endif %}</td>
-  <td class="text-right"><a class="btn btn-danger btn-sm" href="themes/delete/{{theme.id_cat}}" data-toggle="tooltip" data-placement="top" title="Удалиться тема и все вопросы данной темы"> Удалить тему</a></td>
+  <td class="text-right"><a class="btn btn-danger btn-sm" href="/themes/delete/{{theme.id_cat}}" data-toggle="tooltip" data-placement="top" title="Удалиться тема и все вопросы данной темы"> Удалить тему</a></td>
 </tr>
   {% endfor %}
 </table>
